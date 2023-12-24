@@ -13,21 +13,18 @@ int main(void){
     int matrixB[10][10];
     int rowA, colA;
     int rowB, colB;
-    int operation;//used in swtich statements
+    int operation;//used in switch statements
     char again = 'Y';
-    int scalar = 0;
     int add = 1;
     int sub = -1;
 
     while (again == 'Y'){
 
-
         //the operation menu
         printf("\nOperation Menu\n");
         printf("\t1. to Add\n");
         printf("\t2. to Subtract\n");
-        printf("\t3. to Scalar Multiply\n");
-        printf("\t4. to Multiply two matrices\n");
+        printf("\t3. to Multiply two matrices\n");
         printf("Enter your choice: ");
         scanf(" %d", &operation);
 
@@ -41,7 +38,7 @@ int main(void){
             printf("Enter the #rows and #cols for matrix B: ");
             scanf("%d%d", &rowB, &colB);
 
-            while ((rowA != rowB) && (colA != colB)){
+            while ((rowA != rowB) || (colA != colB)){
                 printf("\nMatrices must be the same size\n");
                 printf("\nEnter the #rows and #cols for matrix A: ");
                 scanf("%d%d", &rowA, &colA);
@@ -77,7 +74,7 @@ int main(void){
             printf("Enter the #rows and #cols for matrix B: ");
             scanf("%d%d", &rowB, &colB);
 
-            while ((rowA != rowB) && (colA != colB)){
+            while ((rowA != rowB) || (colA != colB)){
                 printf("\nMatrices must be the same size\n");
                 printf("\nEnter the #rows and #cols for matrix A: ");
                 scanf("%d%d", &rowA, &colA);
@@ -101,26 +98,6 @@ int main(void){
             break;
 
         case 3:
-
-            printf("\nEnter the scalar: ");
-            scanf("%d", &scalar);
-            printf("\nThe scalar is: %d ", scalar);
-
-
-            printf("\nEnter the #rows and #cols for matrix A: ");
-            scanf("%d%d", &rowA, &colA);
-
-            printf("\n\tEnter elements of Matrix A a %d x %d matrix.\n", rowA, colA); // with the %d we remember the user the dimensions of the array
-            readMatrix(matrixA, rowA, colA);
-            printf("\n\t\tMatrix A\n\n");
-            printMatrix(matrixA, rowA, colA);
-
-            printf("\nThe scalar multiplication between matrixA * %d is: \n", scalar);
-            matrixScalarMultiply(matrixA, scalar, rowA, colA);
-
-            break;
-
-        case 4:
             //when multiplying arrays matrixA column # has to equal matrixB row #
             printf("\nEnter the #rows and #cols for matrix A: ");
             scanf("%d%d", &rowA, &colA);
@@ -151,7 +128,7 @@ int main(void){
             printf("\n\t\tMatrix A\n\n");
             printMatrix(matrixB, rowB, colB);
 
-            //multiplyng arrays
+            //multiplying arrays
             matrixMultiply(matrixA, matrixB, rowA, colA, colB);
 
             break;
@@ -216,19 +193,6 @@ void matrixAddSub(int arrayone[10][10], int arraytwo[10][10], int rows, int colu
     }
 }
 
-
-void matrixScalarMultiply(int array[10][10], int scalar, int rows, int colums){
-    int i, j;
-    int scaM[10][10];
-    for (i = 0; i < rows; i++){
-        for (j = 0; j < colums; j++){
-            scaM[i][j] = scalar * array[i][j];
-            printf("%d\t", scaM[i][j]);
-        }
-        printf("\n");
-    }
-
-}
 
 void matrixMultiply(int arrayone[10][10], int arraytwo[10][10], int rowsA, int columsA,int columsB){
     int i, j, k;
